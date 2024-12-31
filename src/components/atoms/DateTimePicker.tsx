@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 interface DateTimePickerProps {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string; 
+  onChange: (value: string) => void; 
   label: string;
 }
 
@@ -13,7 +13,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({ value, onChange, label 
       <input
         type="datetime-local"
         value={value}
-        onChange={onChange}
+        onChange={(e) => onChange(e.target.value)} 
         className="w-full p-2 border border-gray-300 rounded-md"
       />
     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DateTimePicker from "../atoms/DateTimePicker"; 
+import DateTimePicker from "../atoms/DateTimePicker";
 
 interface EditTaskModalProps {
   isOpen: boolean;
@@ -30,8 +30,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
     setUpdatedTask({ ...updatedTask, [name]: value });
   };
 
-  const handleDateTimeChange = (field: string, value: Date) => {
-    setUpdatedTask({ ...updatedTask, [field]: value.toISOString() }); 
+  const handleDateTimeChange = (field: string, value: string) => {
+    setUpdatedTask({ ...updatedTask, [field]: value }); // No conversion needed.
   };
 
   return (
@@ -39,10 +39,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
       <div className="bg-white p-6 rounded-lg shadow-md w-2/5">
         <h2 className="text-2xl font-semibold mb-4">Edit Task</h2>
 
-        
         <p className="mb-4 text-sm text-gray-600">Task ID: {taskData.id}</p>
 
-        
         <label className="block mb-4">
           Title:
           <input
@@ -54,7 +52,6 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
           />
         </label>
 
-
         <label className="block mb-4">
           Priority:
           <select
@@ -63,15 +60,14 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
             onChange={handleInputChange}
             className="w-full p-2 border rounded"
           >
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
+            {[1, 2, 3, 4, 5].map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            ))}
           </select>
         </label>
 
-        
         <label className="block mb-4">
           Status:
           <select
@@ -80,28 +76,32 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
             onChange={handleInputChange}
             className="w-full p-2 border rounded"
           >
-            <option value="Pending">Pending</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Finished">Finished</option>
+            {["Pending", "In Progress", "Finished"].map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
           </select>
         </label>
 
-        
         <label className="block mb-4">
           Start Time:
           <DateTimePicker
-            value={new Date(updatedTask.startTime)}
-            onChange={(date) => handleDateTimeChange("startTime", date as Date)}
+            label="Start Time"
+            value={updatedTask.startTime}
+            onChange={(value) => handleDateTimeChange("startTime", value)}
           />
         </label>
 
         <label className="block mb-4">
           End Time:
           <DateTimePicker
-            value={new Date(updatedTask.endTime)}
-            onChange={(date) => handleDateTimeChange("endTime", date as Date)}
+            label="End Time"
+            value={updatedTask.endTime}
+            onChange={(value) => handleDateTimeChange("endTime", value)}
           />
         </label>
+
         <div className="flex justify-end gap-4">
           <button
             onClick={onCancel}
