@@ -39,7 +39,14 @@ const TaskListPageCard: React.FC = () => {
     
   };
 
-  const tasks = [
+  const tasks: {
+    taskId: number;
+    taskTitle: string;
+    status: "In Progress" | "Pending" | "Finished";
+    priority: number;
+    startTime: string;
+    endTime: string;
+  }[] = [
     {
       taskId: 1,
       taskTitle: "Design Homepage",
@@ -65,6 +72,7 @@ const TaskListPageCard: React.FC = () => {
       endTime: "2024-12-03 09:00 AM",
     },
   ];
+  
 
   return (
     <div className="max-w-7xl mx-auto p-6">

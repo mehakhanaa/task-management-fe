@@ -4,7 +4,7 @@ import StatusLabel from "../atoms/StatusLabel";
 interface TaskCardProps {
   taskId: number;
   taskTitle: string;
-  status: "Pending" | "In Progress" | "Finished"; // Explicitly match StatusLabelProps
+  status: "Pending" | "In Progress" | "Finished"; 
   priority: number;
   startTime: string;
   endTime: string;
